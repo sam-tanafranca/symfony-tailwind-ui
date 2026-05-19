@@ -125,14 +125,12 @@
                     <svg class="w-4 h-4 text-zinc-600 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     <input type="text" placeholder="Search thread" class="pl-8 pr-4 py-1.5 w-44 bg-white rounded-[10px] text-[13px] outline-none text-zinc-800 placeholder-zinc-500 border border-zinc-200/80 focus:border-zinc-300 focus:ring-2 focus:ring-zinc-100 transition-all shadow-sm">
                 </div>
-                <button class="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-[10px] border border-zinc-200/80 text-[13px] font-medium text-zinc-800 shadow-sm hover:bg-zinc-50 transition-colors">
-                    <svg class="w-4 h-4 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
-                    Invite
-                </button>
-                <button class="flex items-center gap-1.5 px-3 py-1.5 bg-[#18181b] rounded-[10px] text-[13px] font-medium text-white shadow-sm hover:bg-black transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"></path></svg>
-                    New Thread
-                </button>
+                <a href="{{ path('app_login') }}" class="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-[10px] border border-zinc-200/80 text-[13px] font-medium text-zinc-800 shadow-sm hover:bg-zinc-50 transition-colors">
+                    Login
+                </a>
+                <a href="{{ path('app_register') }}" class="flex items-center gap-1.5 px-3 py-1.5 bg-[#18181b] rounded-[10px] text-[13px] font-medium text-white shadow-sm hover:bg-black transition-colors">
+                    Register
+                </a>
             </div>
         </header>
 
@@ -170,27 +168,18 @@
                             <svg class="w-3.5 h-3.5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
                             Attach
                         </button>
-                        <div class="relative">
-                            <button id="writing-styles-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] bg-white transition-colors text-[13px] font-medium text-zinc-700 border border-zinc-200/80 hover:bg-zinc-50">
-                                Writing Styles
-                                <svg class="w-3.5 h-3.5 text-zinc-500 transition-transform duration-200" id="writing-styles-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg>
-                            </button>
-                            
-                            <!-- Dropdown Menu -->
-                            <div id="writing-styles-dropdown" class="absolute left-0 bottom-[110%] mb-1 w-40 bg-white rounded-[12px] border border-zinc-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.08)] py-1.5 opacity-0 invisible transition-all duration-200 origin-bottom-left scale-95 z-50">
-                                <button class="w-full text-left px-3 py-1.5 text-[13px] text-zinc-700 hover:bg-zinc-50 transition-colors font-medium">Professional</button>
-                                <button class="w-full text-left px-3 py-1.5 text-[13px] text-zinc-700 hover:bg-zinc-50 transition-colors font-medium">Casual</button>
-                                <button class="w-full text-left px-3 py-1.5 text-[13px] text-zinc-700 hover:bg-zinc-50 transition-colors font-medium">Concise</button>
-                            </div>
-                        </div>
+                        <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] bg-white transition-colors text-[13px] font-medium text-zinc-700 border border-zinc-200/80 hover:bg-zinc-50">
+                            Writing Styles
+                            <svg class="w-3.5 h-3.5 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
                     </div>
                     <div class="flex items-center gap-4">
                         <label class="flex items-center gap-2 cursor-pointer text-[13px] font-medium text-zinc-700">
                             <div class="relative">
-                                <input type="checkbox" class="sr-only peer" checked>
-                                <div class="block w-[34px] h-[18px] rounded-full bg-zinc-200 peer-checked:bg-[#7e22ce] transition-colors duration-200"></div>
-                                <div class="absolute left-[2px] top-[2px] bg-white w-[14px] h-[14px] rounded-full shadow-sm flex items-center justify-center transition-transform duration-200 peer-checked:translate-x-[16px]">
-                                    <div class="w-1.5 h-1.5 rounded-full bg-[#7e22ce] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></div>
+                                <input type="checkbox" class="sr-only" checked>
+                                <div class="block bg-[#7e22ce] w-[34px] h-[18px] rounded-full"></div>
+                                <div class="absolute right-[2px] top-[2px] bg-white w-[14px] h-[14px] rounded-full shadow-sm flex items-center justify-center">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-[#7e22ce]"></div>
                                 </div>
                             </div>
                             Citation
@@ -233,84 +222,5 @@
     </main>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Reset all links
-                navLinks.forEach(n => {
-                    const indicator = n.querySelector('.nav-indicator');
-                    if (indicator) {
-                        indicator.classList.remove('opacity-100');
-                        indicator.classList.add('opacity-0');
-                    }
-                    
-                    const wrapper = n.querySelector('.nav-icon-wrapper');
-                    if (wrapper) {
-                        wrapper.className = 'nav-icon-wrapper w-10 h-10 flex items-center justify-center text-zinc-500 bg-transparent rounded-[10px] group-hover:bg-zinc-100 group-hover:text-zinc-800 transition-colors';
-                    }
-                });
-                
-                // Set active link
-                const indicator = link.querySelector('.nav-indicator');
-                if (indicator) {
-                    indicator.classList.remove('opacity-0');
-                    indicator.classList.add('opacity-100');
-                }
-                
-                const wrapper = link.querySelector('.nav-icon-wrapper');
-                if (wrapper) {
-                    wrapper.className = 'nav-icon-wrapper w-10 h-10 flex items-center justify-center bg-purple-50 text-[#a855f7] rounded-[10px] transition-colors';
-                }
-            });
-        });
-        
-        // Writing Styles Dropdown Logic
-        const stylesBtn = document.getElementById('writing-styles-btn');
-        const stylesDropdown = document.getElementById('writing-styles-dropdown');
-        const stylesIcon = document.getElementById('writing-styles-icon');
-        
-        if (stylesBtn && stylesDropdown) {
-            stylesBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const isExpanded = !stylesDropdown.classList.contains('invisible');
-                
-                if (isExpanded) {
-                    stylesDropdown.classList.add('invisible', 'opacity-0', 'scale-95');
-                    stylesDropdown.classList.remove('opacity-100', 'scale-100');
-                    stylesIcon.classList.remove('rotate-180');
-                } else {
-                    stylesDropdown.classList.remove('invisible', 'opacity-0', 'scale-95');
-                    stylesDropdown.classList.add('opacity-100', 'scale-100');
-                    stylesIcon.classList.add('rotate-180');
-                }
-            });
-            
-            // Close dropdown when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!stylesBtn.contains(e.target) && !stylesDropdown.contains(e.target)) {
-                    stylesDropdown.classList.add('invisible', 'opacity-0', 'scale-95');
-                    stylesDropdown.classList.remove('opacity-100', 'scale-100');
-                    stylesIcon.classList.remove('rotate-180');
-                }
-            });
-            
-            // Allow selecting a style
-            const styleOptions = stylesDropdown.querySelectorAll('button');
-            styleOptions.forEach(option => {
-                option.addEventListener('click', (e) => {
-                    // Just close it for now and maybe visually update the button text if needed
-                    // (Keeping original text per request, just making it close)
-                    stylesDropdown.classList.add('invisible', 'opacity-0', 'scale-95');
-                    stylesDropdown.classList.remove('opacity-100', 'scale-100');
-                    stylesIcon.classList.remove('rotate-180');
-                });
-            });
-        }
-    });
-</script>
+
 {% endblock %}
