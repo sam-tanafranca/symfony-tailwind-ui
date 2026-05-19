@@ -170,18 +170,27 @@
                             <svg class="w-3.5 h-3.5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
                             Attach
                         </button>
-                        <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] bg-white transition-colors text-[13px] font-medium text-zinc-700 border border-zinc-200/80 hover:bg-zinc-50">
-                            Writing Styles
-                            <svg class="w-3.5 h-3.5 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg>
-                        </button>
+                        <div class="relative">
+                            <button id="writing-styles-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] bg-white transition-colors text-[13px] font-medium text-zinc-700 border border-zinc-200/80 hover:bg-zinc-50">
+                                Writing Styles
+                                <svg class="w-3.5 h-3.5 text-zinc-500 transition-transform duration-200" id="writing-styles-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            
+                            <!-- Dropdown Menu -->
+                            <div id="writing-styles-dropdown" class="absolute left-0 bottom-[110%] mb-1 w-40 bg-white rounded-[12px] border border-zinc-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.08)] py-1.5 opacity-0 invisible transition-all duration-200 origin-bottom-left scale-95 z-50">
+                                <button class="w-full text-left px-3 py-1.5 text-[13px] text-zinc-700 hover:bg-zinc-50 transition-colors font-medium">Professional</button>
+                                <button class="w-full text-left px-3 py-1.5 text-[13px] text-zinc-700 hover:bg-zinc-50 transition-colors font-medium">Casual</button>
+                                <button class="w-full text-left px-3 py-1.5 text-[13px] text-zinc-700 hover:bg-zinc-50 transition-colors font-medium">Concise</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="flex items-center gap-4">
                         <label class="flex items-center gap-2 cursor-pointer text-[13px] font-medium text-zinc-700">
                             <div class="relative">
-                                <input type="checkbox" class="sr-only" checked>
-                                <div class="block bg-[#7e22ce] w-[34px] h-[18px] rounded-full"></div>
-                                <div class="absolute right-[2px] top-[2px] bg-white w-[14px] h-[14px] rounded-full shadow-sm flex items-center justify-center">
-                                    <div class="w-1.5 h-1.5 rounded-full bg-[#7e22ce]"></div>
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="block w-[34px] h-[18px] rounded-full bg-zinc-200 peer-checked:bg-[#7e22ce] transition-colors duration-200"></div>
+                                <div class="absolute left-[2px] top-[2px] bg-white w-[14px] h-[14px] rounded-full shadow-sm flex items-center justify-center transition-transform duration-200 peer-checked:translate-x-[16px]">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-[#7e22ce] opacity-0 peer-checked:opacity-100 transition-opacity duration-200"></div>
                                 </div>
                             </div>
                             Citation
@@ -259,6 +268,49 @@
                 }
             });
         });
+        
+        // Writing Styles Dropdown Logic
+        const stylesBtn = document.getElementById('writing-styles-btn');
+        const stylesDropdown = document.getElementById('writing-styles-dropdown');
+        const stylesIcon = document.getElementById('writing-styles-icon');
+        
+        if (stylesBtn && stylesDropdown) {
+            stylesBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isExpanded = !stylesDropdown.classList.contains('invisible');
+                
+                if (isExpanded) {
+                    stylesDropdown.classList.add('invisible', 'opacity-0', 'scale-95');
+                    stylesDropdown.classList.remove('opacity-100', 'scale-100');
+                    stylesIcon.classList.remove('rotate-180');
+                } else {
+                    stylesDropdown.classList.remove('invisible', 'opacity-0', 'scale-95');
+                    stylesDropdown.classList.add('opacity-100', 'scale-100');
+                    stylesIcon.classList.add('rotate-180');
+                }
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!stylesBtn.contains(e.target) && !stylesDropdown.contains(e.target)) {
+                    stylesDropdown.classList.add('invisible', 'opacity-0', 'scale-95');
+                    stylesDropdown.classList.remove('opacity-100', 'scale-100');
+                    stylesIcon.classList.remove('rotate-180');
+                }
+            });
+            
+            // Allow selecting a style
+            const styleOptions = stylesDropdown.querySelectorAll('button');
+            styleOptions.forEach(option => {
+                option.addEventListener('click', (e) => {
+                    // Just close it for now and maybe visually update the button text if needed
+                    // (Keeping original text per request, just making it close)
+                    stylesDropdown.classList.add('invisible', 'opacity-0', 'scale-95');
+                    stylesDropdown.classList.remove('opacity-100', 'scale-100');
+                    stylesIcon.classList.remove('rotate-180');
+                });
+            });
+        }
     });
 </script>
 {% endblock %}
