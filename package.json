@@ -22,6 +22,6 @@
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production --progress && COMPOSER_ALLOW_SUPERUSER=1 composer run-script post-install-cmd"
+        "build": "encore production --progress && COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --no-interaction --optimize-autoloader"
     }
 }
