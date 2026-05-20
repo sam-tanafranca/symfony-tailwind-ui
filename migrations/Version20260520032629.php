@@ -48,13 +48,10 @@ final class Version20260520032629 extends AbstractMigration
         } else {
             $this->addSql('ALTER TABLE `user` CHANGE old_sys_id old_sys_id VARCHAR(255) DEFAULT NULL, CHANGE roles roles JSON NOT NULL, CHANGE roles_allowed roles_allowed JSON NOT NULL, CHANGE types types JSON NOT NULL');
         }
-        
-        $this->addSql('ALTER TABLE messenger_messages CHANGE delivered_at delivered_at DATETIME DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
         $this->addSql('DROP TABLE IF EXISTS `user`');
-        $this->addSql('ALTER TABLE messenger_messages CHANGE delivered_at delivered_at DATETIME DEFAULT \'NULL\'');
     }
 }
