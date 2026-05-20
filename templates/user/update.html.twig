@@ -124,15 +124,14 @@
             
             <div class="grid grid-cols-2 gap-x-8 gap-y-4">
                 
-                <!-- Toggle Item -->
+                <!-- Checkbox Item -->
                 <div class="flex items-center justify-between py-2 border-b border-zinc-50">
                     <div>
                         <span class="block text-[13.5px] font-medium text-zinc-800">Global Account Status</span>
                         <span class="text-[12px] text-zinc-400">Determine whether user can sign in.</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        {{ form_widget(form.is_active, {'attr': {'class': 'sr-only peer'}}) }}
-                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_active, {'attr': {'class': 'w-5 h-5 text-purple-600 border-zinc-300 rounded focus:ring-purple-500 bg-white transition-colors cursor-pointer accent-purple-600'}}) }}
                     </label>
                 </div>
 
@@ -141,9 +140,8 @@
                         <span class="block text-[13.5px] font-medium text-zinc-800">Company Access Scope</span>
                         <span class="text-[12px] text-zinc-400">Access to records across all companies.</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        {{ form_widget(form.is_access_all_company, {'attr': {'class': 'sr-only peer'}}) }}
-                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_company, {'attr': {'class': 'w-5 h-5 text-purple-600 border-zinc-300 rounded focus:ring-purple-500 bg-white transition-colors cursor-pointer accent-purple-600'}}) }}
                     </label>
                 </div>
 
@@ -152,9 +150,8 @@
                         <span class="block text-[13.5px] font-medium text-zinc-800">Branch Access Scope</span>
                         <span class="text-[12px] text-zinc-400">Access to all branch locations.</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        {{ form_widget(form.is_access_all_branch, {'attr': {'class': 'sr-only peer'}}) }}
-                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_branch, {'attr': {'class': 'w-5 h-5 text-purple-600 border-zinc-300 rounded focus:ring-purple-500 bg-white transition-colors cursor-pointer accent-purple-600'}}) }}
                     </label>
                 </div>
 
@@ -163,9 +160,8 @@
                         <span class="block text-[13.5px] font-medium text-zinc-800">Business Unit Access Scope</span>
                         <span class="text-[12px] text-zinc-400">Access data from all corporate units.</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        {{ form_widget(form.is_access_all_b_u, {'attr': {'class': 'sr-only peer'}}) }}
-                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_b_u, {'attr': {'class': 'w-5 h-5 text-purple-600 border-zinc-300 rounded focus:ring-purple-500 bg-white transition-colors cursor-pointer accent-purple-600'}}) }}
                     </label>
                 </div>
 
@@ -174,9 +170,8 @@
                         <span class="block text-[13.5px] font-medium text-zinc-800">Division Access Scope</span>
                         <span class="text-[12px] text-zinc-400">Unrestricted access to all divisions.</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        {{ form_widget(form.is_access_all_division, {'attr': {'class': 'sr-only peer'}}) }}
-                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_division, {'attr': {'class': 'w-5 h-5 text-purple-600 border-zinc-300 rounded focus:ring-purple-500 bg-white transition-colors cursor-pointer accent-purple-600'}}) }}
                     </label>
                 </div>
 
@@ -185,9 +180,8 @@
                         <span class="block text-[13.5px] font-medium text-zinc-800">Department Access Scope</span>
                         <span class="text-[12px] text-zinc-400">Read department-wide datasets.</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        {{ form_widget(form.is_access_all_dept, {'attr': {'class': 'sr-only peer'}}) }}
-                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_dept, {'attr': {'class': 'w-5 h-5 text-purple-600 border-zinc-300 rounded focus:ring-purple-500 bg-white transition-colors cursor-pointer accent-purple-600'}}) }}
                     </label>
                 </div>
 
@@ -196,9 +190,8 @@
                         <span class="block text-[13.5px] font-medium text-zinc-800">Department Unit Access Scope</span>
                         <span class="text-[12px] text-zinc-400">Access to all discrete work sections.</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        {{ form_widget(form.is_access_all_dept_unit, {'attr': {'class': 'sr-only peer'}}) }}
-                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_dept_unit, {'attr': {'class': 'w-5 h-5 text-purple-600 border-zinc-300 rounded focus:ring-purple-500 bg-white transition-colors cursor-pointer accent-purple-600'}}) }}
                     </label>
                 </div>
 
@@ -207,13 +200,13 @@
                         <span class="block text-[13.5px] font-medium text-zinc-800">Employee Type Access Scope</span>
                         <span class="text-[12px] text-zinc-400">View classifications across all work roles.</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        {{ form_widget(form.is_access_all_emp_type, {'attr': {'class': 'sr-only peer'}}) }}
-                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_emp_type, {'attr': {'class': 'w-5 h-5 text-purple-600 border-zinc-300 rounded focus:ring-purple-500 bg-white transition-colors cursor-pointer accent-purple-600'}}) }}
                     </label>
                 </div>
 
             </div>
+        </div>
         </div>
 
         <!-- Form Submission Buttons -->
