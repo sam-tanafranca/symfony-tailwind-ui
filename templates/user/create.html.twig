@@ -1,0 +1,229 @@
+{% extends 'layout/admin.html.twig' %}
+
+{% block title %}Create User - Lumeo AI{% endblock %}
+
+{% block content %}
+<div class="px-8 py-8 w-full max-w-[900px] mx-auto">
+    
+    <!-- Breadcrumb & Header -->
+    <div class="mb-8">
+        <div class="flex items-center gap-1.5 text-[13px] text-zinc-500 mb-2.5">
+            <a href="{{ path('app_user_index') }}" class="hover:text-zinc-800 transition-colors">Users</a>
+            <span>&rsaquo;</span>
+            <span class="text-zinc-800 font-medium">Create User</span>
+        </div>
+        <h1 class="text-[28px] font-semibold text-zinc-900 tracking-tight leading-none">Create New User</h1>
+    </div>
+
+    <!-- Form Container -->
+    {{ form_start(form, {'attr': {'class': 'flex flex-col gap-6'}}) }}
+        
+        <!-- Section 1: Basic Information -->
+        <div class="bg-white border border-zinc-200/80 rounded-[16px] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6">
+            <h2 class="text-[16px] font-semibold text-zinc-900 mb-4 pb-2.5 border-b border-zinc-100">Personal Information</h2>
+            
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    {{ form_label(form.first_name) }}
+                    {{ form_widget(form.first_name) }}
+                    {{ form_errors(form.first_name, {'attr': {'class': 'text-rose-500 text-[12px] mt-1'}}) }}
+                </div>
+                <div>
+                    {{ form_label(form.last_name) }}
+                    {{ form_widget(form.last_name) }}
+                    {{ form_errors(form.last_name, {'attr': {'class': 'text-rose-500 text-[12px] mt-1'}}) }}
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                    {{ form_errors(form.email, {'attr': {'class': 'text-rose-500 text-[12px] mt-1'}}) }}
+                </div>
+                <div>
+                    {{ form_label(form.old_sys_id) }}
+                    {{ form_widget(form.old_sys_id) }}
+                    {{ form_errors(form.old_sys_id, {'attr': {'class': 'text-rose-500 text-[12px] mt-1'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Account Security -->
+        <div class="bg-white border border-zinc-200/80 rounded-[16px] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6">
+            <h2 class="text-[16px] font-semibold text-zinc-900 mb-4 pb-2.5 border-b border-zinc-100">Security Credentials</h2>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    {{ form_label(form.username) }}
+                    {{ form_widget(form.username) }}
+                    {{ form_errors(form.username, {'attr': {'class': 'text-rose-500 text-[12px] mt-1'}}) }}
+                </div>
+                <div>
+                    {{ form_label(form.password) }}
+                    {{ form_widget(form.password) }}
+                    {{ form_errors(form.password, {'attr': {'class': 'text-rose-500 text-[12px] mt-1'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Roles & Types Configuration -->
+        <div class="bg-white border border-zinc-200/80 rounded-[16px] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6">
+            <h2 class="text-[16px] font-semibold text-zinc-900 mb-4 pb-2.5 border-b border-zinc-100">Permissions & Classifications</h2>
+            
+            <div class="grid grid-cols-3 gap-6">
+                <!-- System Roles -->
+                <div>
+                    {{ form_label(form.roles) }}
+                    <div class="flex flex-col gap-2 mt-2">
+                        {% for choice in form.roles %}
+                            <label class="inline-flex items-center cursor-pointer">
+                                {{ form_widget(choice, {'attr': {'class': 'w-4 h-4 text-purple-600 border-zinc-300 rounded focus:ring-purple-500 bg-white transition-colors cursor-pointer'}}) }}
+                                <span class="ml-2 text-[13.5px] text-zinc-700 select-none">{{ choice.vars.label }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    {{ form_errors(form.roles) }}
+                </div>
+
+                <!-- Allowed Roles -->
+                <div>
+                    {{ form_label(form.roles_allowed) }}
+                    <div class="flex flex-col gap-2 mt-2">
+                        {% for choice in form.roles_allowed %}
+                            <label class="inline-flex items-center cursor-pointer">
+                                {{ form_widget(choice, {'attr': {'class': 'w-4 h-4 text-purple-600 border-zinc-300 rounded focus:ring-purple-500 bg-white transition-colors cursor-pointer'}}) }}
+                                <span class="ml-2 text-[13.5px] text-zinc-700 select-none">{{ choice.vars.label }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    {{ form_errors(form.roles_allowed) }}
+                </div>
+
+                <!-- User Types -->
+                <div>
+                    {{ form_label(form.types) }}
+                    <div class="flex flex-col gap-2 mt-2">
+                        {% for choice in form.types %}
+                            <label class="inline-flex items-center cursor-pointer">
+                                {{ form_widget(choice, {'attr': {'class': 'w-4 h-4 text-purple-600 border-zinc-300 rounded focus:ring-purple-500 bg-white transition-colors cursor-pointer'}}) }}
+                                <span class="ml-2 text-[13.5px] text-zinc-700 select-none">{{ choice.vars.label }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    {{ form_errors(form.types) }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Data Access Scopes -->
+        <div class="bg-white border border-zinc-200/80 rounded-[16px] shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-6">
+            <h2 class="text-[16px] font-semibold text-zinc-900 mb-4 pb-2.5 border-b border-zinc-100">Data Access Privileges</h2>
+            
+            <div class="grid grid-cols-2 gap-x-8 gap-y-4">
+                
+                <!-- Toggle Item -->
+                <div class="flex items-center justify-between py-2 border-b border-zinc-50">
+                    <div>
+                        <span class="block text-[13.5px] font-medium text-zinc-800">Global Account Status</span>
+                        <span class="text-[12px] text-zinc-400">Determine whether user can sign in.</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_active, {'attr': {'class': 'sr-only peer'}}) }}
+                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    </label>
+                </div>
+
+                <div class="flex items-center justify-between py-2 border-b border-zinc-50">
+                    <div>
+                        <span class="block text-[13.5px] font-medium text-zinc-800">Company Access Scope</span>
+                        <span class="text-[12px] text-zinc-400">Access to records across all companies.</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_company, {'attr': {'class': 'sr-only peer'}}) }}
+                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    </label>
+                </div>
+
+                <div class="flex items-center justify-between py-2 border-b border-zinc-50">
+                    <div>
+                        <span class="block text-[13.5px] font-medium text-zinc-800">Branch Access Scope</span>
+                        <span class="text-[12px] text-zinc-400">Access to all branch locations.</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_branch, {'attr': {'class': 'sr-only peer'}}) }}
+                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    </label>
+                </div>
+
+                <div class="flex items-center justify-between py-2 border-b border-zinc-50">
+                    <div>
+                        <span class="block text-[13.5px] font-medium text-zinc-800">Business Unit Access Scope</span>
+                        <span class="text-[12px] text-zinc-400">Access data from all corporate units.</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_b_u, {'attr': {'class': 'sr-only peer'}}) }}
+                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    </label>
+                </div>
+
+                <div class="flex items-center justify-between py-2 border-b border-zinc-50">
+                    <div>
+                        <span class="block text-[13.5px] font-medium text-zinc-800">Division Access Scope</span>
+                        <span class="text-[12px] text-zinc-400">Unrestricted access to all divisions.</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_division, {'attr': {'class': 'sr-only peer'}}) }}
+                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    </label>
+                </div>
+
+                <div class="flex items-center justify-between py-2 border-b border-zinc-50">
+                    <div>
+                        <span class="block text-[13.5px] font-medium text-zinc-800">Department Access Scope</span>
+                        <span class="text-[12px] text-zinc-400">Read department-wide datasets.</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_dept, {'attr': {'class': 'sr-only peer'}}) }}
+                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    </label>
+                </div>
+
+                <div class="flex items-center justify-between py-2 border-b border-zinc-50">
+                    <div>
+                        <span class="block text-[13.5px] font-medium text-zinc-800">Department Unit Access Scope</span>
+                        <span class="text-[12px] text-zinc-400">Access to all discrete work sections.</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_dept_unit, {'attr': {'class': 'sr-only peer'}}) }}
+                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    </label>
+                </div>
+
+                <div class="flex items-center justify-between py-2 border-b border-zinc-50">
+                    <div>
+                        <span class="block text-[13.5px] font-medium text-zinc-800">Employee Type Access Scope</span>
+                        <span class="text-[12px] text-zinc-400">View classifications across all work roles.</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        {{ form_widget(form.is_access_all_emp_type, {'attr': {'class': 'sr-only peer'}}) }}
+                        <div class="w-9 h-5 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-purple-600"></div>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Form Submission Buttons -->
+        <div class="flex items-center justify-end gap-3 mt-4">
+            <a href="{{ path('app_user_index') }}" class="px-5 py-2.5 rounded-[10px] text-[13.5px] font-medium text-zinc-700 bg-white border border-zinc-200 hover:bg-zinc-50 transition-colors cursor-pointer">
+                Cancel
+            </a>
+            <button type="submit" class="px-5 py-2.5 bg-[#18181b] hover:bg-black text-white text-[13.5px] font-medium rounded-[10px] transition-colors shadow-sm cursor-pointer">
+                Create User
+            </button>
+        </div>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}

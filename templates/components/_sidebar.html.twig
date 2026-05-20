@@ -1,0 +1,115 @@
+<!-- Sidebar -->
+{% set current_route = app.request.attributes.get('_route') %}
+
+<aside class="w-[72px] bg-[#fcfcfc] flex flex-col items-center py-6 border-r border-zinc-100/80 z-10 shrink-0">
+    <!-- Logo -->
+    <a href="{{ path('app_dashboard') }}" class="w-8 h-8 bg-zinc-900 rounded-full flex items-center justify-center mb-6 shrink-0 shadow-sm">
+        <svg class="w-5 h-5 text-zinc-100" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <g stroke-width="2" stroke-linecap="butt">
+                <line x1="12" y1="3" x2="12" y2="7"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+                <line x1="12" y1="3" x2="12" y2="7" transform="rotate(30 12 12)"></line>
+                <line x1="12" y1="17" x2="12" y2="21" transform="rotate(30 12 12)"></line>
+                <line x1="12" y1="3" x2="12" y2="7" transform="rotate(60 12 12)"></line>
+                <line x1="12" y1="17" x2="12" y2="21" transform="rotate(60 12 12)"></line>
+                <line x1="12" y1="3" x2="12" y2="7" transform="rotate(90 12 12)"></line>
+                <line x1="12" y1="17" x2="12" y2="21" transform="rotate(90 12 12)"></line>
+                <line x1="12" y1="3" x2="12" y2="7" transform="rotate(120 12 12)"></line>
+                <line x1="12" y1="17" x2="12" y2="21" transform="rotate(120 12 12)"></line>
+                <line x1="12" y1="3" x2="12" y2="7" transform="rotate(150 12 12)"></line>
+                <line x1="12" y1="17" x2="12" y2="21" transform="rotate(150 12 12)"></line>
+            </g>
+        </svg>
+    </a>
+
+    <!-- Top Nav -->
+    <nav class="flex flex-col items-center gap-1 w-full" id="sidebar-nav">
+        <!-- Home (Dashboard) -->
+        {% set is_home_active = (current_route == 'app_dashboard') %}
+        <a href="{{ path('app_dashboard') }}" class="nav-link relative flex justify-center w-full group py-1 {% if is_home_active %}active{% endif %}" title="Dashboard">
+            <div class="nav-indicator absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#a855f7] rounded-r-full transition-opacity {% if is_home_active %}opacity-100{% else %}opacity-0{% endif %}"></div>
+            <div class="nav-icon-wrapper w-10 h-10 flex items-center justify-center {% if is_home_active %}bg-purple-50 text-[#a855f7]{% else %}text-zinc-500 bg-transparent{% endif %} rounded-[10px] group-hover:bg-zinc-100 group-hover:text-zinc-800 transition-colors">
+                <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            </div>
+        </a>
+        
+        <!-- User Management (CRUD) -->
+        {% set is_user_active = (current_route starts with 'app_user') %}
+        <a href="{{ path('app_user_index') }}" class="nav-link relative flex justify-center w-full group py-1 {% if is_user_active %}active{% endif %}" title="User Management">
+            <div class="nav-indicator absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#a855f7] rounded-r-full transition-opacity {% if is_user_active %}opacity-100{% else %}opacity-0{% endif %}"></div>
+            <div class="nav-icon-wrapper w-10 h-10 flex items-center justify-center {% if is_user_active %}bg-purple-50 text-[#a855f7]{% else %}text-zinc-500 bg-transparent{% endif %} rounded-[10px] group-hover:bg-zinc-100 group-hover:text-zinc-800 transition-colors">
+                <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+            </div>
+        </a>
+
+        <!-- Message -->
+        <a href="#" class="nav-link relative flex justify-center w-full group py-1" title="Messages">
+            <div class="nav-indicator absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#a855f7] rounded-r-full transition-opacity opacity-0"></div>
+            <div class="nav-icon-wrapper w-10 h-10 flex items-center justify-center text-zinc-500 bg-transparent rounded-[10px] group-hover:bg-zinc-100 group-hover:text-zinc-800 transition-colors">
+                <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 11.99h.01M12 11.99h.01M16 11.99h.01M4 7c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.5l-4 4v-4H6a2 2 0 0 1-2-2V7z"></path></svg>
+            </div>
+        </a>
+        <!-- History -->
+        <a href="#" class="nav-link relative flex justify-center w-full group py-1" title="History">
+            <div class="nav-indicator absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#a855f7] rounded-r-full transition-opacity opacity-0"></div>
+            <div class="nav-icon-wrapper w-10 h-10 flex items-center justify-center text-zinc-500 bg-transparent rounded-[10px] group-hover:bg-zinc-100 group-hover:text-zinc-800 transition-colors">
+                <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 1 1-1.7-5.3L21 8m0 0V3m0 5h-5"></path></svg>
+            </div>
+        </a>
+        <!-- Robot -->
+        <a href="#" class="nav-link relative flex justify-center w-full group py-1" title="AI Assistant">
+            <div class="nav-indicator absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#a855f7] rounded-r-full transition-opacity opacity-0"></div>
+            <div class="nav-icon-wrapper w-10 h-10 flex items-center justify-center text-zinc-500 bg-transparent rounded-[10px] group-hover:bg-zinc-100 group-hover:text-zinc-800 transition-colors">
+                <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 16h6m-7-5h.01M16 11h.01M6 8h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2zm-4 4h2m16 0h2m-11-7v2m2-2v2"></path></svg>
+            </div>
+        </a>
+        <!-- Folder -->
+        <a href="#" class="nav-link relative flex justify-center w-full group py-1" title="Files">
+            <div class="nav-indicator absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#a855f7] rounded-r-full transition-opacity opacity-0"></div>
+            <div class="nav-icon-wrapper w-10 h-10 flex items-center justify-center text-zinc-500 bg-transparent rounded-[10px] group-hover:bg-zinc-100 group-hover:text-zinc-800 transition-colors">
+                <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+            </div>
+        </a>
+        <!-- Share -->
+        <a href="#" class="nav-link relative flex justify-center w-full group py-1" title="Share">
+            <div class="nav-indicator absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#a855f7] rounded-r-full transition-opacity opacity-0"></div>
+            <div class="nav-icon-wrapper w-10 h-10 flex items-center justify-center text-zinc-500 bg-transparent rounded-[10px] group-hover:bg-zinc-100 group-hover:text-zinc-800 transition-colors">
+                <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+            </div>
+        </a>
+        <!-- Database -->
+        <a href="#" class="nav-link relative flex justify-center w-full group py-1" title="Database">
+            <div class="nav-indicator absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#a855f7] rounded-r-full transition-opacity opacity-0"></div>
+            <div class="nav-icon-wrapper w-10 h-10 flex items-center justify-center text-zinc-500 bg-transparent rounded-[10px] group-hover:bg-zinc-100 group-hover:text-zinc-800 transition-colors">
+                <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+            </div>
+        </a>
+    </nav>
+
+    <!-- Bottom Nav -->
+    <div class="flex flex-col items-center gap-1 mt-auto w-full" id="sidebar-bottom-nav">
+        <!-- Headphones -->
+        <a href="#" class="nav-link relative flex justify-center w-full group py-1" title="Support">
+            <div class="nav-indicator absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#a855f7] rounded-r-full transition-opacity opacity-0"></div>
+            <div class="nav-icon-wrapper w-10 h-10 flex items-center justify-center text-zinc-500 bg-transparent rounded-[10px] group-hover:bg-zinc-100 group-hover:text-zinc-800 transition-colors">
+                <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 14v-4a9 9 0 0118 0v4m-18 0a2 2 0 002 2h2a2 2 0 002-2v-4a2 2 0 00-2-2H5m16 6a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4a2 2 0 012-2h2"></path></svg>
+            </div>
+        </a>
+        <!-- Gear -->
+        <a href="#" class="nav-link relative flex justify-center w-full group py-1" title="Settings">
+            <div class="nav-indicator absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#a855f7] rounded-r-full transition-opacity opacity-0"></div>
+            <div class="nav-icon-wrapper w-10 h-10 flex items-center justify-center text-zinc-500 bg-transparent rounded-[10px] group-hover:bg-zinc-100 group-hover:text-zinc-800 transition-colors">
+                <svg class="w-[20px] h-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </div>
+        </a>
+        
+        <div class="mt-4 mb-2">
+            <!-- Avatar Profile -->
+            <div class="w-[30px] h-[30px] rounded-full overflow-hidden border border-zinc-200 cursor-pointer hover:opacity-80 transition-opacity">
+                <img src="https://i.pravatar.cc/150?img=11" alt="User Avatar" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </div>
+</aside>

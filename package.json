@@ -23,5 +23,10 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress && COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --no-interaction --optimize-autoloader"
+    },
+    "dependencies": {
+        "datatables.net": "^2.3.8",
+        "datatables.net-dt": "^2.3.8",
+        "jquery": "^4.0.0"
     }
 }

@@ -1,0 +1,251 @@
+{% extends 'layout/admin.html.twig' %}
+
+{% block title %}User Management - Lumeo AI{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- DataTables Default CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <!-- DataTables Extra Styling overrides to match our design system -->
+    <style>
+        /* Main Container styling */
+        .dt-container, .dataTables_wrapper {
+            font-family: inherit;
+            color: #27272a;
+        }
+        
+        /* Header controls layout */
+        .dt-layout-row:first-child, .dataTables_length, .dataTables_filter {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        /* Search Box styling */
+        .dt-search input, .dataTables_wrapper .dataTables_filter input {
+            border: 1px solid #e4e4e7 !important;
+            border-radius: 10px !important;
+            padding: 6px 12px !important;
+            outline: none !important;
+            background-color: #fcfcfc !important;
+            font-size: 13.5px !important;
+            color: #18181b !important;
+            transition: all 0.2s !important;
+            width: 220px !important;
+        }
+        
+        .dt-search input:focus, .dataTables_wrapper .dataTables_filter input:focus {
+            border-color: #a855f7 !important;
+            box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.1) !important;
+        }
+        
+        /* Length Select styling */
+        .dt-length select, .dataTables_wrapper .dataTables_length select {
+            border: 1px solid #e4e4e7 !important;
+            border-radius: 8px !important;
+            padding: 4px 8px !important;
+            outline: none !important;
+            background-color: #fcfcfc !important;
+            font-size: 13px !important;
+            color: #18181b !important;
+        }
+        
+        /* Info & Pagination Footer */
+        .dt-layout-row:last-child {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #f4f4f5;
+        }
+        
+        /* Pagination Buttons */
+        .dt-paging .dt-paging-button, .dataTables_wrapper .dataTables_paginate .paginate_button {
+            border-radius: 8px !important;
+            border: 1px solid transparent !important;
+            font-size: 13px !important;
+            padding: 4px 10px !important;
+            transition: all 0.2s !important;
+            cursor: pointer !important;
+            background: transparent !important;
+            color: #71717a !important;
+        }
+        
+        .dt-paging .dt-paging-button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: #18181b !important;
+            color: #ffffff !important;
+            border-color: #18181b !important;
+            font-weight: 500 !important;
+        }
+        
+        .dt-paging .dt-paging-button:hover, .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: #f4f4f5 !important;
+            color: #18181b !important;
+            border-color: #e4e4e7 !important;
+        }
+        
+        /* Sorting Icons styling */
+        table.dataTable thead > tr > th.dt-orderable-asc,
+        table.dataTable thead > tr > th.dt-orderable-desc {
+            cursor: pointer;
+            position: relative;
+            padding-right: 24px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="px-8 py-8 w-full max-w-[1200px] mx-auto">
+    
+    <!-- Top Bar -->
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h1 class="text-[28px] font-semibold text-zinc-900 tracking-tight leading-none mb-1.5">User Management</h1>
+            <p class="text-[14px] text-zinc-500">Create, update, view, and manage application users and access levels.</p>
+        </div>
+        
+        <a href="{{ path('app_user_create') }}" class="flex items-center gap-1.5 px-4 py-2 bg-[#18181b] rounded-[10px] text-[13px] font-medium text-white shadow-sm hover:bg-black transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"></path>
+            </svg>
+            Create User
+        </a>
+    </div>
+
+    <!-- Flash Messages -->
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="mb-6 p-4 rounded-[12px] text-[14px] font-medium flex items-center gap-2.5 {% if label == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-100{% else %}bg-rose-50 text-rose-800 border border-rose-100{% endif %}">
+                {% if label == 'success' %}
+                    <svg class="w-5 h-5 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                {% else %}
+                    <svg class="w-5 h-5 text-rose-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                {% endif %}
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <!-- Users Table Card -->
+    <div class="bg-white border border-zinc-200/80 rounded-[16px] shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden p-6">
+        <table id="users-table" class="w-full text-left border-collapse">
+            <thead>
+                <tr class="border-b border-zinc-100 text-[12px] font-semibold text-zinc-500 uppercase tracking-wider">
+                    <th class="pb-3.5 pl-2">Full Name</th>
+                    <th class="pb-3.5">Username</th>
+                    <th class="pb-3.5">Email</th>
+                    <th class="pb-3.5">Roles</th>
+                    <th class="pb-3.5">Status</th>
+                    <th class="pb-3.5 text-right pr-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-50 text-[13.5px] text-zinc-700">
+                {% for user in users %}
+                    <tr class="hover:bg-zinc-50/50 transition-colors">
+                        <td class="py-4 pl-2 font-medium text-zinc-900">
+                            {{ user.fullName }}
+                            {% if user.oldSysId %}
+                                <span class="ml-1 text-[11px] bg-zinc-100 text-zinc-600 px-1.5 py-0.5 rounded">ID: {{ user.oldSysId }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="py-4 font-mono text-[12.5px] text-zinc-600">@{{ user.username }}</td>
+                        <td class="py-4">{{ user.email }}</td>
+                        <td class="py-4">
+                            <div class="flex flex-wrap gap-1">
+                                {% for role in user.roles %}
+                                    <span class="text-[11px] px-2 py-0.5 rounded-full font-medium {% if role == 'ROLE_ADMIN' %}bg-purple-50 text-purple-700 border border-purple-100{% elseif role == 'ROLE_MANAGER' %}bg-blue-50 text-blue-700 border border-blue-100{% else %}bg-zinc-50 text-zinc-700 border border-zinc-200{% endif %}">
+                                        {{ role|replace({'ROLE_': ''}) }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        </td>
+                        <td class="py-4">
+                            {% if user.isActive %}
+                                <span class="inline-flex items-center gap-1 text-[12px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+                                </span>
+                            {% else %}
+                                <span class="inline-flex items-center gap-1 text-[12px] font-semibold text-zinc-500 bg-zinc-50 px-2.5 py-0.5 rounded-full border border-zinc-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-zinc-400"></span> Inactive
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td class="py-4 text-right pr-2">
+                            <div class="flex items-center justify-end gap-2.5">
+                                <a href="{{ path('app_user_show', {id: user.id}) }}" class="text-zinc-600 hover:text-zinc-900 transition-colors font-medium" title="View Details">
+                                    View
+                                </a>
+                                <a href="{{ path('app_user_edit', {id: user.id}) }}" class="text-purple-600 hover:text-purple-900 transition-colors font-medium" title="Edit User">
+                                    Edit
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="py-8 text-center text-zinc-500">
+                            No users found. Create one to get started!
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Load jQuery and DataTables via CDN for robust sync execution -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script>
+        function initDataTable() {
+            if (typeof jQuery === 'undefined' || typeof $.fn.DataTable === 'undefined') {
+                return;
+            }
+            
+            var $table = $('#users-table');
+            if ($table.length === 0 || $.fn.DataTable.isDataTable('#users-table')) {
+                return;
+            }
+            
+            var tableRows = $table.find('tbody tr');
+            var isEmpty = tableRows.length === 1 && tableRows.find('td').hasClass('text-center');
+            
+            if (!isEmpty && tableRows.length > 0) {
+                $table.DataTable({
+                    order: [[0, 'asc']],
+                    pageLength: 10,
+                    responsive: true,
+                    columnDefs: [
+                        { orderable: false, targets: 5 } // Disable sorting on Action column
+                    ],
+                    language: {
+                        search: "Search users:",
+                        lengthMenu: "Show _MENU_ entries"
+                    }
+                });
+            }
+        }
+
+        // Run on jQuery ready
+        jQuery(document).ready(function($) {
+            initDataTable();
+        });
+
+        // Run on Turbo page transitions
+        document.addEventListener("turbo:load", function() {
+            initDataTable();
+        });
+
+        // Destroy before caching to prevent duplicate UI elements on history navigation
+        document.addEventListener("turbo:before-cache", function() {
+            if (typeof jQuery !== 'undefined' && typeof $.fn.DataTable !== 'undefined' && $.fn.DataTable.isDataTable('#users-table')) {
+                $('#users-table').DataTable().destroy();
+            }
+        });
+    </script>
+{% endblock %}
