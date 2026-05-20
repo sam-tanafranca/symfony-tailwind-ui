@@ -13,77 +13,156 @@
             color: #27272a;
         }
         
-        /* Header controls layout */
-        .dt-layout-row:first-child, .dataTables_length, .dataTables_filter {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        /* Layout structures */
+        .dt-layout-row {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            width: 100% !important;
             gap: 16px;
-            margin-bottom: 16px;
+        }
+        
+        .dt-layout-row:first-child {
+            margin-bottom: 20px !important;
+        }
+        
+        .dt-layout-row:last-child {
+            margin-top: 20px !important;
+            padding-top: 16px !important;
+            border-top: 1px solid #f4f4f5 !important;
+        }
+        
+        .dt-layout-cell {
+            padding: 0 !important;
         }
         
         /* Search Box styling */
+        .dt-search, .dataTables_filter {
+            display: flex !important;
+            align-items: center !important;
+        }
+        
+        .dt-search label, .dataTables_filter label {
+            display: none !important; /* Hide old text prefix search label */
+        }
+        
         .dt-search input, .dataTables_wrapper .dataTables_filter input {
             border: 1px solid #e4e4e7 !important;
             border-radius: 10px !important;
-            padding: 6px 12px !important;
+            padding: 8px 12px 8px 36px !important; /* Spacing on the left for magnifying glass */
             outline: none !important;
-            background-color: #fcfcfc !important;
+            background-color: #ffffff !important;
             font-size: 13.5px !important;
             color: #18181b !important;
-            transition: all 0.2s !important;
-            width: 220px !important;
+            transition: all 0.2s ease-in-out !important;
+            width: 240px !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: 12px center !important;
+            background-size: 16px 16px !important;
         }
         
         .dt-search input:focus, .dataTables_wrapper .dataTables_filter input:focus {
             border-color: #a855f7 !important;
-            box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.1) !important;
+            background-color: #ffffff !important;
+            box-shadow: 0 0 0 2.5px rgba(168, 85, 247, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
         }
         
-        /* Length Select styling */
-        .dt-length select, .dataTables_wrapper .dataTables_length select {
-            border: 1px solid #e4e4e7 !important;
-            border-radius: 8px !important;
-            padding: 4px 8px !important;
-            outline: none !important;
-            background-color: #fcfcfc !important;
-            font-size: 13px !important;
-            color: #18181b !important;
-        }
-        
-        /* Info & Pagination Footer */
-        .dt-layout-row:last-child {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 16px;
-            padding-top: 12px;
-            border-top: 1px solid #f4f4f5;
-        }
-        
-        /* Pagination Buttons */
-        .dt-paging .dt-paging-button, .dataTables_wrapper .dataTables_paginate .paginate_button {
-            border-radius: 8px !important;
-            border: 1px solid transparent !important;
-            font-size: 13px !important;
-            padding: 4px 10px !important;
-            transition: all 0.2s !important;
-            cursor: pointer !important;
-            background: transparent !important;
+        /* Entries Dropdown styling */
+        .dt-length, .dataTables_length {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            font-size: 13.5px !important;
             color: #71717a !important;
         }
         
-        .dt-paging .dt-paging-button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        .dt-length select, .dataTables_wrapper .dataTables_length select {
+            border: 1px solid #e4e4e7 !important;
+            border-radius: 8px !important;
+            padding: 6px 32px 6px 12px !important; /* Space on right for chevron icon */
+            outline: none !important;
+            background-color: #ffffff !important;
+            font-size: 13.5px !important;
+            color: #18181b !important;
+            font-weight: 500 !important;
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2371717a' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: calc(100% - 10px) center !important;
+            background-size: 14px 14px !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease-in-out !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+        }
+        
+        .dt-length select:hover, .dataTables_wrapper .dataTables_length select:hover {
+            border-color: #d4d4d8 !important;
+        }
+        
+        .dt-length select:focus, .dataTables_wrapper .dataTables_length select:focus {
+            border-color: #a855f7 !important;
+            box-shadow: 0 0 0 2.5px rgba(168, 85, 247, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+        }
+        
+        /* Table Info styling */
+        .dt-info, .dataTables_info {
+            font-size: 13.5px !important;
+            color: #71717a !important;
+        }
+        
+        /* Pagination Container and Buttons styling */
+        .dt-paging, .dataTables_paginate {
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+        }
+        
+        .dt-paging .dt-paging-button, .dataTables_wrapper .dataTables_paginate .paginate_button {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-width: 32px !important;
+            height: 32px !important;
+            padding: 0 8px !important;
+            border-radius: 8px !important;
+            border: 1px solid #e4e4e7 !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            background: #ffffff !important;
+            color: #3f3f46 !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+            transition: all 0.2s ease-in-out !important;
+        }
+        
+        .dt-paging .dt-paging-button:hover:not(.disabled):not(.current), 
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover:not(.disabled):not(.current) {
+            background: #f4f4f5 !important;
+            color: #18181b !important;
+            border-color: #d4d4d8 !important;
+        }
+        
+        .dt-paging .dt-paging-button.current, 
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
             background: #18181b !important;
             color: #ffffff !important;
             border-color: #18181b !important;
-            font-weight: 500 !important;
+            font-weight: 600 !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 4px 12px rgba(24, 24, 27, 0.15) !important;
         }
         
-        .dt-paging .dt-paging-button:hover, .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        .dt-paging .dt-paging-button.disabled, 
+        .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+            opacity: 0.4 !important;
+            cursor: not-allowed !important;
             background: #f4f4f5 !important;
-            color: #18181b !important;
             border-color: #e4e4e7 !important;
+            color: #a1a1aa !important;
+            box-shadow: none !important;
         }
         
         /* Sorting Icons styling */
@@ -224,7 +303,8 @@
                         { orderable: false, targets: 5 } // Disable sorting on Action column
                     ],
                     language: {
-                        search: "Search users:",
+                        search: "",
+                        searchPlaceholder: "Search users...",
                         lengthMenu: "Show _MENU_ entries"
                     }
                 });
